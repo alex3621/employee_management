@@ -1,38 +1,46 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from '../../services/employee.service';
+import { Employee } from '../../models/employee.model';
 
 @Component({
   selector: 'app-employee-form',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
   templateUrl: './employee-form.component.html',
   styleUrls: ['./employee-form.component.css']
 })
 export class EmployeeFormComponent implements OnInit {
-  employee: any = {};
+  employeeForm: FormGroup;
   isEditMode = false;
+  employeeId: number | null = null;
 
   constructor(
+    private formBuilder: FormBuilder,
+    private employeeService: EmployeeService,
     private route: ActivatedRoute,
-    private router: Router,
-    private employeeService: EmployeeService
-  ) { }
+    private router: Router
+  ) {
+    this.employeeForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]]
+    });
+  }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.isEditMode = true;
-      this.loadEmployee(+id);
-    }
+    this.route.params.subscribe(params => {
+      if (params['id']) {
+        this.isEditMode = true;
+        this.employeeId = +params['id'];
+        this.loadEmployee(this.employeeId);
+      }
+    });
   }
 
   loadEmployee(id: number): void {
     this.employeeService.getEmployee(id).subscribe(
-      (data) => {
-        this.employee = data;
+      (employee: Employee) => {
+        this.employeeForm.patchValue(employee);
       },
       (error) => {
         console.error('Error loading employee', error);
@@ -40,25 +48,28 @@ export class EmployeeFormComponent implements OnInit {
     );
   }
 
-  saveEmployee(): void {
-    if (this.isEditMode) {
-      this.employeeService.updateEmployee(this.employee.id, this.employee).subscribe(
-        () => {
-          this.router.navigate(['/employees']);
-        },
-        (error) => {
-          console.error('Error updating employee', error);
-        }
-      );
-    } else {
-      this.employeeService.createEmployee(this.employee).subscribe(
-        () => {
-          this.router.navigate(['/employees']);
-        },
-        (error) => {
-          console.error('Error creating employee', error);
-        }
-      );
+  onSubmit(): void {
+    if (this.employeeForm.valid) {
+      const employee: Employee = this.employeeForm.value;
+      if (this.isEditMode && this.employeeId) {
+        this.employeeService.updateEmployee(this.employeeId, employee).subscribe(
+          () => {
+            this.router.navigate(['/employees']);
+          },
+          (error) => {
+            console.error('Error updating employee', error);
+          }
+        );
+      } else {
+        this.employeeService.createEmployee(employee).subscribe(
+          () => {
+            this.router.navigate(['/employees']);
+          },
+          (error) => {
+            console.error('Error creating employee', error);
+          }
+        );
+      }
     }
   }
 }
