@@ -7,8 +7,7 @@ import { Employee } from '../models/employee.model';
   providedIn: 'root'
 })
 export class EmployeeService {
-  private apiUrl = 'http://localhost:8080/api/employees'; // Adjust this URL to match your backend API
-
+  private apiUrl = 'http://localhost:8080/api/employees'; 
   constructor(private http: HttpClient) { }
 
   getEmployees(): Observable<Employee[]> {
