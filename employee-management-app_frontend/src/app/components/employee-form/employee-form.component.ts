@@ -4,13 +4,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from '../../services/employee.service';
 import { Employee } from '../../models/employee.model';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-employee-form',
   templateUrl: './employee-form.component.html',
-  styleUrls: ['./employee-form.component.css']
+  styleUrls: ['./employee-form.component.css'],
+  standalone: true,
+  imports: [ReactiveFormsModule, CommonModule]
 })
+
 export class EmployeeFormComponent implements OnInit {
   employeeForm: FormGroup;
   isEditMode = false;
