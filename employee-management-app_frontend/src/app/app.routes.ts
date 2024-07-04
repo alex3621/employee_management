@@ -6,7 +6,7 @@ import { EmployeeDetailsComponent } from './components/employee-details/employee
 import { LoginComponent } from './components/login/login.component';
 import { DepartmentListComponent } from './components/department-list/department-list.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', redirectTo: '/employees', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'employees', component: EmployeeListComponent },

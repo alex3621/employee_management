@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from '../../services/employee.service';
 import { Employee } from '../../models/employee.model';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-employee-form',
