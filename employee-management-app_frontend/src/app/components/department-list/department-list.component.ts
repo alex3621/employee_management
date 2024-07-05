@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DepartmentService } from '../../services/department.service';
+import { Department } from '../../models/department.model';
 
 @Component({
   selector: 'app-department-list',
@@ -10,7 +11,9 @@ import { DepartmentService } from '../../services/department.service';
   styleUrls: ['./department-list.component.css']
 })
 export class DepartmentListComponent implements OnInit {
-  departments: any[] = [];
+  departments: Department[] = []; // Use the Department type instead of any
+  loading: boolean = false;
+  error: string | null = null;
 
   constructor(private departmentService: DepartmentService) { }
 
@@ -19,13 +22,18 @@ export class DepartmentListComponent implements OnInit {
   }
 
   loadDepartments(): void {
-    this.departmentService.getDepartments().subscribe(
-      (data) => {
+    this.loading = true;
+    this.error = null;
+    this.departmentService.getDepartments().subscribe({
+      next: (data) => {
         this.departments = data;
+        this.loading = false;
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching departments', error);
+        this.error = 'Failed to load departments. Please try again later.';
+        this.loading = false;
       }
-    );
+    });
   }
 }

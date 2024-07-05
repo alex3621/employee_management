@@ -1,1 +1,30 @@
-<p>department-list works!</p>
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">Departments</h2>
+            <button class="btn btn-light" (click)="loadDepartments()">
+              <i class="bi bi-arrow-clockwise"></i> Refresh
+            </button>
+          </div>
+          <div class="card-body">
+            <div *ngIf="loading" class="text-center">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+            <div *ngIf="!loading && departments.length === 0" class="alert alert-info">
+              No departments found.
+            </div>
+            <ul *ngIf="!loading && departments.length > 0" class="list-group">
+              <li *ngFor="let department of departments" class="list-group-item d-flex justify-content-between align-items-center">
+                {{ department.name }}
+                <span class="badge bg-primary rounded-pill">{{ department.employeeCount }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
