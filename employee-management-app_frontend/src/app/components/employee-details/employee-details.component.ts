@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from '../../services/employee.service';
-import { Employee } from '../../models/employee.model'; 
+import { Employee } from '../../models/employee.model';
 
 @Component({
   selector: 'app-employee-details',
@@ -15,6 +15,7 @@ export class EmployeeDetailsComponent implements OnInit {
   employee: Employee | null = null;
   loading: boolean = true;
   error: string | null = null;
+  showDeleteConfirmation: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -23,6 +24,10 @@ export class EmployeeDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loadEmployeeDetails();
+  }
+
+  loadEmployeeDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.loadEmployee(+id);
@@ -50,5 +55,41 @@ export class EmployeeDetailsComponent implements OnInit {
 
   goBack(): void {
     this.router.navigate(['/employees']);
+  }
+
+  editEmployee(): void {
+    if (this.employee) {
+      this.router.navigate(['/employees', this.employee.id, 'edit']);
+    }
+  }
+
+  confirmDelete(): void {
+    this.showDeleteConfirmation = true;
+  }
+
+  cancelDelete(): void {
+    this.showDeleteConfirmation = false;
+  }
+
+  deleteEmployee(): void {
+    if (this.employee) {
+      this.employeeService.deleteEmployee(this.employee.id).subscribe({
+        next: () => {
+          this.router.navigate(['/employees']);
+        },
+        error: (error) => {
+          console.error('Error deleting employee', error);
+          this.error = 'Failed to delete employee. Please try again later.';
+        }
+      });
+    }
+  }
+
+  retry(): void {
+    if (this.employee) {
+      this.loadEmployee(this.employee.id);
+    } else {
+      this.loadEmployeeDetails();
+    }
   }
 }
