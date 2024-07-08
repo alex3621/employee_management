@@ -7,7 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { DepartmentListComponent } from './components/department-list/department-list.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/employees', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'employees', component: EmployeeListComponent },
   { path: 'employees/new', component: EmployeeFormComponent },

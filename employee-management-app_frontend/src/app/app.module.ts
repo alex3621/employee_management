@@ -25,7 +25,7 @@ import { DepartmentListComponent } from './components/department-list/department
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: '/employees', pathMatch: 'full' },
+      { path: '', redirectTo: '/login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
       { path: 'employees', component: EmployeeListComponent },
       { path: 'employees/new', component: EmployeeFormComponent },
