@@ -83,14 +83,37 @@ export class EmployeeService {
   // }
 
   createEmployee(employee: Employee): Observable<Employee> {
-    return this.http.post<Employee>(this.apiUrl, employee);
+    const newId = Math.max(...this.mockEmployees.map(emp => emp.id)) + 1;
+    const newEmployee = { ...employee, id: newId };
+    this.mockEmployees.push(newEmployee);
+    return of(newEmployee);
   }
+  // createEmployee(employee: Employee): Observable<Employee> {
+  //   return this.http.post<Employee>(this.apiUrl, employee);
+  // }
+
 
   updateEmployee(id: number, employee: Employee): Observable<Employee> {
-    return this.http.put<Employee>(`${this.apiUrl}/${id}`, employee);
+    const index = this.mockEmployees.findIndex(emp => emp.id === id);
+    if (index !== -1) {
+      this.mockEmployees[index] = { ...employee, id };
+      return of(this.mockEmployees[index]);
+    }
+    return of(employee);
   }
+  // updateEmployee(id: number, employee: Employee): Observable<Employee> {
+  //   return this.http.put<Employee>(`${this.apiUrl}/${id}`, employee);
+  // }
+
 
   deleteEmployee(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    const index = this.mockEmployees.findIndex(emp => emp.id === id);
+    if (index !== -1) {
+      this.mockEmployees.splice(index, 1);
+    }
+    return of(undefined);
   }
+  // deleteEmployee(id: number): Observable<void> {
+  //   return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  // }
 }
