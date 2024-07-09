@@ -17,4 +17,8 @@ export class AppComponent {
   logClick(route: string) {
     console.log(`Clicked ${route}`);
   }
+  getCurrentUser(): string {
+    const user = this.authService.getCurrentUser();
+    return user ? user.username : '';
+  }
 }
