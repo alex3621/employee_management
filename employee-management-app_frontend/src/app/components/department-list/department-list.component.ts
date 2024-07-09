@@ -11,7 +11,7 @@ import { Department } from '../../models/department.model';
   styleUrls: ['./department-list.component.css']
 })
 export class DepartmentListComponent implements OnInit {
-  departments: Department[] = []; // Use the Department type instead of any
+  departments: Department[] = []; 
   loading: boolean = false;
   error: string | null = null;
 

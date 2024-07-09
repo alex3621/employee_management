@@ -16,7 +16,7 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<boolean> {
-    if (username === 'admin' && password === 'password') {
+    if (username === 'admin' && password === 'admin') {
       const user = { username: username, role: 'admin' };
       const token = 'fake-jwt-token';
       const expiresIn = 3600; 

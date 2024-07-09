@@ -1,41 +1,35 @@
-<div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <h2 class="mb-0">Employee List</h2>
-      <button class="btn btn-success" routerLink="/employees/new">
-        <i class="bi bi-plus-circle me-2"></i>Add New Employee
-      </button>
-    </div>
-    
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <thead class="table-light">
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let employee of employees">
-            <td>{{ employee.firstName }}</td>
-            <td>{{ employee.lastName }}</td>
-            <td>{{ employee.email }}</td>
-            <td>
-            <div class="btn-group" role="group">
-                <button class="btn btn-outline-info btn-sm" [routerLink]="['/employees', employee.id]">
-                  <i class="bi bi-eye me-1"></i>View
-                </button>
-                <button class="btn btn-outline-primary btn-sm" [routerLink]="['/employees', employee.id, 'edit']">
-                  <i class="bi bi-pencil me-1"></i>Edit
-                </button>
-                <button class="btn btn-outline-danger btn-sm" (click)="employee.id && deleteEmployee(employee.id)">
-                  <i class="bi bi-trash me-1"></i>Delete
-                </button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+
+<h2>Employee List</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Department</th>
+      <th>Position</th>
+      <th>Hire Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of employees">
+      <td>{{ employee.id }}</td>
+      <td>{{ employee.firstName }} {{ employee.lastName }}</td>
+      <td>{{ employee.email }}</td>
+      <td>{{ employee.phone || 'N/A' }}</td>
+      <td>{{ employee.department }}</td>
+      <td>{{ employee.position }}</td>
+      <td>{{ employee.hireDate | date }}</td>
+      <td>
+        <button class="btn btn-sm btn-info" [routerLink]="['/employees', employee.id]">View</button>
+        <button class="btn btn-sm btn-warning" [routerLink]="['/employees', employee.id, 'edit']">Edit</button>
+        <button class="btn btn-sm btn-danger" (click)="deleteEmployee(employee.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button class="btn btn-primary" routerLink="/employees/new">Add New Employee</button>
