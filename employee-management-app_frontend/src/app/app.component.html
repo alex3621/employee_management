@@ -6,14 +6,17 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
+          <ng-container *ngIf="authService.isLoggedIn()">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/employees" routerLinkActive="active">Employees</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/departments" routerLinkActive="active">Departments</a>
+            </li>
+          </ng-container>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/employees" routerLinkActive="active">Employees</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/departments" routerLinkActive="active">Departments</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+            <a class="nav-link" *ngIf="!authService.isLoggedIn()" routerLink="/login" routerLinkActive="active">Login</a>
+            <a class="nav-link" *ngIf="authService.isLoggedIn()" (click)="authService.logout()" style="cursor: pointer;">Logout</a>
           </li>
         </ul>
       </div>
