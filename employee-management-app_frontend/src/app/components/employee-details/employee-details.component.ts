@@ -12,7 +12,7 @@ import { Employee } from '../../models/employee.model';
   styleUrls: ['./employee-details.component.css']
 })
 export class EmployeeDetailsComponent implements OnInit {
-  employee: Employee | null = null;
+  employee: Employee | null | undefined = null;
   loading: boolean = true;
   error: string | null = null;
   showDeleteConfirmation: boolean = false;
@@ -42,7 +42,7 @@ export class EmployeeDetailsComponent implements OnInit {
     this.error = null;
     this.employeeService.getEmployee(id).subscribe({
       next: (data) => {
-        this.employee = data;
+        this.employee = data || null;
         this.loading = false;
       },
       error: (error) => {

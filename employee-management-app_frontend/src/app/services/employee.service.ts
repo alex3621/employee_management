@@ -74,9 +74,13 @@ export class EmployeeService {
     // return this.http.get<Employee[]>(this.apiUrl);
   }
 
-  getEmployee(id: number): Observable<Employee> {
-    return this.http.get<Employee>(`${this.apiUrl}/${id}`);
+  getEmployee(id: number): Observable<Employee | undefined> {
+    const employee = this.mockEmployees.find(emp => emp.id === id);
+    return of(employee);
   }
+  // getEmployee(id: number): Observable<Employee> {
+  //   return this.http.get<Employee>(`${this.apiUrl}/${id}`);
+  // }
 
   createEmployee(employee: Employee): Observable<Employee> {
     return this.http.post<Employee>(this.apiUrl, employee);

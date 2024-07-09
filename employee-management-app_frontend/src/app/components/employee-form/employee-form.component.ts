@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { EmployeeService } from '../../services/employee.service';
 import { Employee } from '../../models/employee.model';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './employee-form.component.html',
   styleUrls: ['./employee-form.component.css'],
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule]
+  imports: [ReactiveFormsModule, CommonModule, RouterModule]
 })
 
 export class EmployeeFormComponent implements OnInit {
@@ -44,8 +44,13 @@ export class EmployeeFormComponent implements OnInit {
 
   loadEmployee(id: number): void {
     this.employeeService.getEmployee(id).subscribe(
-      (employee: Employee) => {
-        this.employeeForm.patchValue(employee);
+      (employee: Employee | undefined) => {
+        if (employee) {
+          this.employeeForm.patchValue(employee);
+        } else {
+          console.error('Employee not found');
+          console.log('Redirecting to employees list');
+        }
       },
       (error) => {
         console.error('Error loading employee', error);

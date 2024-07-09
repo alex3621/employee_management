@@ -25,8 +25,8 @@
       <td>{{ employee.hireDate | date }}</td>
       <td>
         <button class="btn btn-sm btn-info" [routerLink]="['/employees', employee.id]">View</button>
-        <button class="btn btn-sm btn-warning" [routerLink]="['/employees', employee.id, 'edit']">Edit</button>
-        <button class="btn btn-sm btn-danger" (click)="deleteEmployee(employee.id)">Delete</button>
+        <button class="btn btn-sm btn-warning ms-1" [routerLink]="['/employees', employee.id, 'edit']">Edit</button>
+        <button class="btn btn-sm btn-danger ms-1" (click)="deleteEmployee(employee.id)">Delete</button>
       </td>
     </tr>
   </tbody>
