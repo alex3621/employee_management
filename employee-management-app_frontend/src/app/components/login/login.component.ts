@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service'; // You'll need to create this service
+import { AuthService } from '../../services/auth.service'; 
 
 @Component({
   selector: 'app-login',
@@ -24,7 +24,7 @@ export class LoginComponent {
       this.authService.login(this.username, this.password).subscribe({
         next: (success) => {
           if (success) {
-            this.router.navigate(['/dashboard']); // Navigate to dashboard on successful login
+            this.router.navigate(['/dashboard']); 
           } else {
             this.error = 'Invalid username or password';
           }
