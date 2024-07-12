@@ -13,7 +13,6 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, RouterModule]
 })
-
 export class EmployeeFormComponent implements OnInit {
   employeeForm: FormGroup;
   isEditMode = false;
@@ -28,7 +27,13 @@ export class EmployeeFormComponent implements OnInit {
     this.employeeForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email]],
+      phone: [''],
+      department: ['', Validators.required],
+      position: ['', Validators.required],
+      hireDate: ['', Validators.required],
+      address: [''],
+      avatar: ['']
     });
   }
 
@@ -46,10 +51,13 @@ export class EmployeeFormComponent implements OnInit {
     this.employeeService.getEmployee(id).subscribe(
       (employee: Employee | undefined) => {
         if (employee) {
-          this.employeeForm.patchValue(employee);
+          this.employeeForm.patchValue({
+            ...employee,
+            hireDate: this.formatDate(employee.hireDate)
+          });
         } else {
           console.error('Employee not found');
-          console.log('Redirecting to employees list');
+          this.router.navigate(['/employees']);
         }
       },
       (error) => {
@@ -58,9 +66,16 @@ export class EmployeeFormComponent implements OnInit {
     );
   }
 
+  formatDate(date: Date): string {
+    return new Date(date).toISOString().split('T')[0];
+  }
+
   onSubmit(): void {
     if (this.employeeForm.valid) {
-      const employee: Employee = this.employeeForm.value;
+      const employee: Employee = {
+        ...this.employeeForm.value,
+        hireDate: new Date(this.employeeForm.value.hireDate)
+      };
       if (this.isEditMode && this.employeeId) {
         this.employeeService.updateEmployee(this.employeeId, employee).subscribe(
           () => {
