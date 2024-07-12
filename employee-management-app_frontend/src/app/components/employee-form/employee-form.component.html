@@ -19,10 +19,34 @@
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" formControlName="email" required>
               </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="tel" class="form-control" id="phone" formControlName="phone">
+              </div>
+              <div class="mb-3">
+                <label for="department" class="form-label">Department</label>
+                <input type="text" class="form-control" id="department" formControlName="department" required>
+              </div>
+              <div class="mb-3">
+                <label for="position" class="form-label">Position</label>
+                <input type="text" class="form-control" id="position" formControlName="position" required>
+              </div>
+              <div class="mb-3">
+                <label for="hireDate" class="form-label">Hire Date</label>
+                <input type="date" class="form-control" id="hireDate" formControlName="hireDate" required>
+              </div>
+              <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <textarea class="form-control" id="address" formControlName="address" rows="3"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="avatar" class="form-label">Avatar URL</label>
+                <input type="url" class="form-control" id="avatar" formControlName="avatar">
+              </div>
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="button" class="btn btn-secondary" routerLink="/employees">Cancel</button>
                 <button type="submit" class="btn btn-primary" [disabled]="!employeeForm.valid">
-                  {{ isEditMode ? 'Update' : 'Create' }}
+                  Submit
                 </button>
               </div>
             </form>
