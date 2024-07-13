@@ -36,4 +36,23 @@ export class DepartmentListComponent implements OnInit {
       }
     });
   }
+  addDepartment(): void {
+    this.departmentService.getNewestId().subscribe(newestId => {
+      const newDepartment: Department = {
+        id: newestId,
+        name: `New Department ${newestId}`,
+        employeeCount: 0
+      };
+  
+      this.departmentService.createDepartment(newDepartment).subscribe({
+        next: (createdDepartment) => {
+          this.loadDepartments();
+        },
+        error: (error) => {
+          console.error('Error creating department', error);
+          this.error = 'Failed to create department. Please try again later.';
+        }
+      });
+    });
+  }
 }
