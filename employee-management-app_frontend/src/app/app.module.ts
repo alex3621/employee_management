@@ -9,6 +9,7 @@ import { EmployeeFormComponent } from './components/employee-form/employee-form.
 import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
 import { LoginComponent } from './components/login/login.component';
 import { DepartmentListComponent } from './components/department-list/department-list.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { DepartmentListComponent } from './components/department-list/department
     EmployeeFormComponent,
     EmployeeDetailsComponent,
     LoginComponent,
-    DepartmentListComponent
+    DepartmentListComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +29,7 @@ import { DepartmentListComponent } from './components/department-list/department
     RouterModule.forRoot([
       { path: '', redirectTo: '/login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
+      { path: 'dashboard', component: DashboardComponent },
       { path: 'employees', component: EmployeeListComponent },
       { path: 'employees/new', component: EmployeeFormComponent },
       { path: 'employees/:id', component: EmployeeDetailsComponent },

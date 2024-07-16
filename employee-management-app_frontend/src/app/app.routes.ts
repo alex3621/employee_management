@@ -6,6 +6,7 @@ import { EmployeeDetailsComponent } from './components/employee-details/employee
 import { LoginComponent } from './components/login/login.component';
 import { DepartmentListComponent } from './components/department-list/department-list.component';
 import { authGuard } from './guards/auth.guard';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -35,6 +36,11 @@ export const routes: Routes = [
     component: DepartmentListComponent, 
     canActivate: [authGuard]
   },
+  { 
+    path: 'dashboard', 
+    component: DashboardComponent, 
+    canActivate: [authGuard]
+  }
 ];
 
 @NgModule({

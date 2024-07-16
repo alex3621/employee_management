@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router'; 
 
 //proxy before backend implementation
 @Injectable({
@@ -10,7 +11,7 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 
-  constructor() {
+  constructor(private router: Router) {
     this.currentUserSubject = new BehaviorSubject<any>(this.getUserFromStorage());
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -39,6 +40,7 @@ export class AuthService {
     localStorage.removeItem('expires_at');
     localStorage.removeItem('user');
     this.currentUserSubject.next(null);
+    this.router.navigate(['/login']);
   }
 
   isLoggedIn(): boolean {
