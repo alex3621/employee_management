@@ -18,7 +18,9 @@ export class EmployeeService {
       position: 'Software Developer',
       hireDate: new Date('2020-01-15'),
       address: '123 Main St, Anytown, USA',
-      avatar: 'https://example.com/avatars/john.jpg'
+      avatar: 'https://example.com/avatars/john.jpg',
+      gender: 'Male',
+      birthDate: new Date('1990-05-15')
     },
     {
       id: 2,
@@ -30,7 +32,9 @@ export class EmployeeService {
       position: 'HR Manager',
       hireDate: new Date('2019-05-20'),
       address: '456 Oak Rd, Somewhere, USA',
-      avatar: 'https://example.com/avatars/jane.jpg'
+      avatar: 'https://example.com/avatars/jane.jpg',
+      gender: 'Female',
+      birthDate: new Date('1985-09-22')
     },
     {
       id: 3,
@@ -40,7 +44,9 @@ export class EmployeeService {
       department: 'Finance',
       position: 'Accountant',
       hireDate: new Date('2021-03-10'),
-      avatar: 'https://example.com/avatars/bob.jpg'
+      avatar: 'https://example.com/avatars/bob.jpg',
+      gender: 'Male',
+      birthDate: new Date('1992-11-30')
     },
     {
       id: 4,
@@ -51,7 +57,9 @@ export class EmployeeService {
       department: 'Marketing',
       position: 'Marketing Specialist',
       hireDate: new Date('2018-11-05'),
-      address: '789 Pine Lane, Elsewhere, USA'
+      address: '789 Pine Lane, Elsewhere, USA',
+      gender: 'Female',
+      birthDate: new Date('1988-07-14')
     },
     {
       id: 5,
@@ -60,7 +68,9 @@ export class EmployeeService {
       email: 'charlie.davis@example.com',
       department: 'Operations',
       position: 'Operations Manager',
-      hireDate: new Date('2017-08-22')
+      hireDate: new Date('2017-08-22'),
+      gender: 'Male',
+      birthDate: new Date('1980-03-08')
     }
   ];
 
