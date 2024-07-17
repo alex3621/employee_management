@@ -9,4 +9,6 @@ export interface Employee {
     hireDate: Date;
     address?: string;
     avatar?: string;
+    gender: 'Male' | 'Female';
+    birthDate: Date;
   }
