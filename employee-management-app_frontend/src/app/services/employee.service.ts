@@ -20,7 +20,11 @@ export class EmployeeService {
       address: '123 Main St, Anytown, USA',
       avatar: 'https://example.com/avatars/john.jpg',
       gender: 'Male',
-      birthDate: new Date('1990-05-15')
+      birthDate: new Date('1990-05-15'),
+      salary: 75000,
+      currency: 'USD',
+      payFrequency: 'Biweekly',
+      lastPayRaise: new Date('2023-01-01')
     },
     {
       id: 2,
@@ -34,7 +38,11 @@ export class EmployeeService {
       address: '456 Oak Rd, Somewhere, USA',
       avatar: 'https://example.com/avatars/jane.jpg',
       gender: 'Female',
-      birthDate: new Date('1985-09-22')
+      birthDate: new Date('1985-09-22'),
+      salary: 85000,
+      currency: 'USD',
+      payFrequency: 'Monthly',
+      lastPayRaise: new Date('2022-11-15')
     },
     {
       id: 3,
@@ -46,7 +54,10 @@ export class EmployeeService {
       hireDate: new Date('2021-03-10'),
       avatar: 'https://example.com/avatars/bob.jpg',
       gender: 'Male',
-      birthDate: new Date('1992-11-30')
+      birthDate: new Date('1992-11-30'),
+      salary: 65000,
+      currency: 'USD',
+      payFrequency: 'Biweekly'
     },
     {
       id: 4,
@@ -59,7 +70,11 @@ export class EmployeeService {
       hireDate: new Date('2018-11-05'),
       address: '789 Pine Lane, Elsewhere, USA',
       gender: 'Female',
-      birthDate: new Date('1988-07-14')
+      birthDate: new Date('1988-07-14'),
+      salary: 70000,
+      currency: 'USD',
+      payFrequency: 'Biweekly',
+      lastPayRaise: new Date('2023-03-01')
     },
     {
       id: 5,
@@ -70,7 +85,11 @@ export class EmployeeService {
       position: 'Operations Manager',
       hireDate: new Date('2017-08-22'),
       gender: 'Male',
-      birthDate: new Date('1980-03-08')
+      birthDate: new Date('1980-03-08'),
+      salary: 90000,
+      currency: 'USD',
+      payFrequency: 'Monthly',
+      lastPayRaise: new Date('2022-12-01')
     }
   ];
 

@@ -11,4 +11,8 @@ export interface Employee {
     avatar?: string;
     gender: 'Male' | 'Female';
     birthDate: Date;
+    salary: number;
+    currency: string;
+    payFrequency: 'Weekly' | 'Biweekly' | 'Monthly' | 'Annually';
+    lastPayRaise?: Date;
   }
