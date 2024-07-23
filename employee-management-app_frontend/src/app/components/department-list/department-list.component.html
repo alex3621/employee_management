@@ -3,30 +3,64 @@
       <div class="col-md-12">
         <div class="card shadow-sm">
           <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-            <h2 id="departments" class="mb-0">Departments</h2>
+            <h2 class="mb-0">Departments</h2>
             <div>
-              <button class="btn btn-light btn-sm me-2" (click)="loadDepartments()">Refresh</button>
-              <button class="btn btn-light btn-sm" (click)="addDepartment()">Add Department</button>
+              <button class="btn btn-light me-2" (click)="loadDepartments()">Refresh</button>
+              <button class="btn btn-light" (click)="addDepartment()">Add Department</button>
             </div>
           </div>
-  
           <div class="card-body">
-            <div class="text-center" *ngIf="loading">
+            <div class="mb-3">
+              <input type="text" class="form-control" placeholder="Filter departments..." 
+                     [(ngModel)]="filterText" (ngModelChange)="onFilterChange()">
+            </div>
+  
+            <div *ngIf="loading" class="text-center">
               <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden">Loading...</span>
               </div>
             </div>
   
-            <div class="alert alert-info" *ngIf="!loading && departments.length === 0">
+            <div *ngIf="error" class="alert alert-danger">
+              {{ error }}
+            </div>
+  
+            <div *ngIf="!loading && filteredDepartments.length === 0" class="alert alert-info">
               No departments found.
             </div>
   
-            <ul class="list-group" *ngIf="!loading && departments.length > 0">
-              <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let department of departments">
-                {{ department.name }}
-                <span class="badge bg-primary rounded-pill">{{ department.employeeCount }}</span>
-              </li>
-            </ul>
+            <table *ngIf="!loading && filteredDepartments.length > 0" class="table table-hover">
+              <thead>
+                <tr>
+                  <th (click)="toggleSort('name')">Name 
+                    <i class="bi" [ngClass]="{'bi-sort-alpha-down': sortField === 'name' && sortDirection === 'asc',
+                                              'bi-sort-alpha-up': sortField === 'name' && sortDirection === 'desc'}"></i>
+                  </th>
+                  <th (click)="toggleSort('employeeCount')">Employee Count 
+                    <i class="bi" [ngClass]="{'bi-sort-numeric-down': sortField === 'employeeCount' && sortDirection === 'asc',
+                                              'bi-sort-numeric-up': sortField === 'employeeCount' && sortDirection === 'desc'}"></i>
+                  </th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let department of filteredDepartments">
+                  <td>
+                    <span *ngIf="editingDepartment?.id !== department.id">{{ department.name }}</span>
+                    <input *ngIf="editingDepartment?.id === department.id" [(ngModel)]="editingName" class="form-control">
+                  </td>
+                  <td>
+                    <span class="badge bg-primary rounded-pill">{{ department.employeeCount }}</span>
+                  </td>
+                  <td>
+                    <button *ngIf="editingDepartment?.id !== department.id" class="btn btn-sm btn-outline-primary me-2" (click)="startEdit(department)">Edit</button>
+                    <button *ngIf="editingDepartment?.id === department.id" class="btn btn-sm btn-success me-2" (click)="saveEdit()">Save</button>
+                    <button *ngIf="editingDepartment?.id === department.id" class="btn btn-sm btn-secondary me-2" (click)="cancelEdit()">Cancel</button>
+                    <button class="btn btn-sm btn-outline-danger" (click)="deleteDepartment(department)">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
