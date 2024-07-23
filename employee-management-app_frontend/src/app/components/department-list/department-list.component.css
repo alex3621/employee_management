@@ -1,0 +1,11 @@
+.table th {
+    cursor: pointer;
+  }
+  
+  .table th:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .bi {
+    margin-left: 5px;
+  }
