@@ -10,19 +10,39 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th>Name</th>
-          <th>Email</th>
+          <th (click)="toggleSort('name')">
+            Name
+            <i class="bi" [ngClass]="{'bi-sort-alpha-down': sortColumn === 'name' && sortDirection === 'asc',
+                                      'bi-sort-alpha-up': sortColumn === 'name' && sortDirection === 'desc'}"></i>
+          </th>
+          <th (click)="toggleSort('email')">
+            Email
+            <i class="bi" [ngClass]="{'bi-sort-alpha-down': sortColumn === 'email' && sortDirection === 'asc',
+                                      'bi-sort-alpha-up': sortColumn === 'email' && sortDirection === 'desc'}"></i>
+          </th>
           <th>Phone</th>
-          <th>Department</th>
-          <th>Position</th>
-          <th>Hire Date</th>
+          <th (click)="toggleSort('department')">
+            Department
+            <i class="bi" [ngClass]="{'bi-sort-alpha-down': sortColumn === 'department' && sortDirection === 'asc',
+                                      'bi-sort-alpha-up': sortColumn === 'department' && sortDirection === 'desc'}"></i>
+          </th>
+          <th (click)="toggleSort('position')">
+            Position
+            <i class="bi" [ngClass]="{'bi-sort-alpha-down': sortColumn === 'position' && sortDirection === 'asc',
+                                      'bi-sort-alpha-up': sortColumn === 'position' && sortDirection === 'desc'}"></i>
+          </th>
+          <th (click)="toggleSort('hireDate')">
+            Hire Date
+            <i class="bi" [ngClass]="{'bi-sort-numeric-down': sortColumn === 'hireDate' && sortDirection === 'asc',
+                                      'bi-sort-numeric-up': sortColumn === 'hireDate' && sortDirection === 'desc'}"></i>
+          </th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let employee of filteredEmployees">
           <td>{{ employee.id }}</td>
-          <td>{{ employee.firstName }} {{ employee.lastName }}</td>
+          <td>{{ employee.lastName }}, {{ employee.firstName }}</td>
           <td>{{ employee.email }}</td>
           <td>{{ employee.phone || 'N/A' }}</td>
           <td>{{ employee.department }}</td>
