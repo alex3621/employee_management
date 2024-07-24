@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-type SortColumn = 'name' | 'email' | 'department' | 'position' | 'hireDate';
+type SortColumn = 'id' | 'name' | 'email' | 'phone' | 'department' | 'position' | 'hireDate';
 
 @Component({
   selector: 'app-employee-list',
@@ -57,7 +57,8 @@ export class EmployeeListComponent implements OnInit {
       employee.firstName.toLowerCase().includes(searchTerm) ||
       employee.lastName.toLowerCase().includes(searchTerm) ||
       employee.email.toLowerCase().includes(searchTerm) ||
-      employee.department.toLowerCase().includes(searchTerm)
+      employee.department.toLowerCase().includes(searchTerm) ||
+      (employee.phone && employee.phone.includes(searchTerm))
     );
 
     this.filteredEmployees.sort((a, b) => {
@@ -65,6 +66,8 @@ export class EmployeeListComponent implements OnInit {
       let bValue: any;
 
       switch (this.sortColumn) {
+        case 'id':
+          return this.sortDirection === 'asc' ? a.id - b.id : b.id - a.id;
         case 'name':
           aValue = a.lastName + a.firstName;
           bValue = b.lastName + b.firstName;
@@ -72,6 +75,10 @@ export class EmployeeListComponent implements OnInit {
         case 'email':
           aValue = a.email;
           bValue = b.email;
+          break;
+        case 'phone':
+          aValue = a.phone || '';
+          bValue = b.phone || '';
           break;
         case 'department':
           aValue = a.department;
@@ -82,9 +89,9 @@ export class EmployeeListComponent implements OnInit {
           bValue = b.position;
           break;
         case 'hireDate':
-          aValue = new Date(a.hireDate);
-          bValue = new Date(b.hireDate);
-          break;
+          return this.sortDirection === 'asc' 
+            ? new Date(a.hireDate).getTime() - new Date(b.hireDate).getTime()
+            : new Date(b.hireDate).getTime() - new Date(a.hireDate).getTime();
       }
 
       if (aValue < bValue) return this.sortDirection === 'asc' ? -1 : 1;

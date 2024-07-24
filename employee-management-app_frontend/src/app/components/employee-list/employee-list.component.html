@@ -9,7 +9,11 @@
     <table class="table table-striped table-hover">
       <thead>
         <tr>
-          <th>ID</th>
+          <th (click)="toggleSort('id')">
+            ID
+            <i class="bi" [ngClass]="{'bi-sort-numeric-down': sortColumn === 'id' && sortDirection === 'asc',
+                                      'bi-sort-numeric-up': sortColumn === 'id' && sortDirection === 'desc'}"></i>
+          </th>
           <th (click)="toggleSort('name')">
             Name
             <i class="bi" [ngClass]="{'bi-sort-alpha-down': sortColumn === 'name' && sortDirection === 'asc',
@@ -20,7 +24,11 @@
             <i class="bi" [ngClass]="{'bi-sort-alpha-down': sortColumn === 'email' && sortDirection === 'asc',
                                       'bi-sort-alpha-up': sortColumn === 'email' && sortDirection === 'desc'}"></i>
           </th>
-          <th>Phone</th>
+          <th (click)="toggleSort('phone')">
+            Phone
+            <i class="bi" [ngClass]="{'bi-sort-alpha-down': sortColumn === 'phone' && sortDirection === 'asc',
+                                      'bi-sort-alpha-up': sortColumn === 'phone' && sortDirection === 'desc'}"></i>
+          </th>
           <th (click)="toggleSort('department')">
             Department
             <i class="bi" [ngClass]="{'bi-sort-alpha-down': sortColumn === 'department' && sortDirection === 'asc',
