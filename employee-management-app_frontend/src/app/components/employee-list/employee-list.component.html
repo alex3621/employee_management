@@ -9,37 +9,37 @@
     <table class="table table-striped table-hover">
       <thead>
         <tr>
-          <th (click)="toggleSort('id')">
+          <th (click)="toggleSort('id')" (keydown.enter)="toggleSort('id')">
             ID
             <i class="bi" [ngClass]="{'bi-sort-numeric-down': sortColumn === 'id' && sortDirection === 'asc',
                                       'bi-sort-numeric-up': sortColumn === 'id' && sortDirection === 'desc'}"></i>
           </th>
-          <th (click)="toggleSort('name')">
+          <th (click)="toggleSort('name')" (keydown.enter)="toggleSort('id')">
             Name
             <i class="bi" [ngClass]="{'bi-sort-alpha-down': sortColumn === 'name' && sortDirection === 'asc',
                                       'bi-sort-alpha-up': sortColumn === 'name' && sortDirection === 'desc'}"></i>
           </th>
-          <th (click)="toggleSort('email')">
+          <th (click)="toggleSort('email')" (keydown.enter)="toggleSort('id')">
             Email
             <i class="bi" [ngClass]="{'bi-sort-alpha-down': sortColumn === 'email' && sortDirection === 'asc',
                                       'bi-sort-alpha-up': sortColumn === 'email' && sortDirection === 'desc'}"></i>
           </th>
-          <th (click)="toggleSort('phone')">
+          <th (click)="toggleSort('phone')" (keydown.enter)="toggleSort('id')">
             Phone
             <i class="bi" [ngClass]="{'bi-sort-alpha-down': sortColumn === 'phone' && sortDirection === 'asc',
                                       'bi-sort-alpha-up': sortColumn === 'phone' && sortDirection === 'desc'}"></i>
           </th>
-          <th (click)="toggleSort('department')">
+          <th (click)="toggleSort('department')" (keydown.enter)="toggleSort('id')">
             Department
             <i class="bi" [ngClass]="{'bi-sort-alpha-down': sortColumn === 'department' && sortDirection === 'asc',
                                       'bi-sort-alpha-up': sortColumn === 'department' && sortDirection === 'desc'}"></i>
           </th>
-          <th (click)="toggleSort('position')">
+          <th (click)="toggleSort('position')" (keydown.enter)="toggleSort('id')">
             Position
             <i class="bi" [ngClass]="{'bi-sort-alpha-down': sortColumn === 'position' && sortDirection === 'asc',
                                       'bi-sort-alpha-up': sortColumn === 'position' && sortDirection === 'desc'}"></i>
           </th>
-          <th (click)="toggleSort('hireDate')">
+          <th (click)="toggleSort('hireDate')" (keydown.enter)="toggleSort('id')">
             Hire Date
             <i class="bi" [ngClass]="{'bi-sort-numeric-down': sortColumn === 'hireDate' && sortDirection === 'asc',
                                       'bi-sort-numeric-up': sortColumn === 'hireDate' && sortDirection === 'desc'}"></i>
